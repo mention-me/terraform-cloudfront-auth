@@ -1,5 +1,5 @@
 locals {
-  lambda_filename = "lambda.zip"
+  lambda_filename = "${var.bucket_name}.lambda.zip"
   s3_origin_id    = "S3-${var.bucket_name}"
 
   // Only set --GITHUB_ORGANIZATION when applicable

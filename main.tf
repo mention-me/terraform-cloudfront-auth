@@ -241,7 +241,7 @@ resource "aws_lambda_function" "default" {
   runtime          = "nodejs12.x"
   role             = aws_iam_role.lambda_role.arn
   filename         = local.lambda_filename
-  function_name    = "cloudfront_auth"
+  function_name    = "cloudfront_auth_${replace(var.bucket_name, ".", "_")}"
   handler          = "index.handler"
   publish          = true
   timeout          = 5
@@ -272,7 +272,7 @@ data "aws_iam_policy_document" "lambda_assume_role" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name               = "lambda_role"
+  name               = "lambda_website_role_${var.bucket_name}"
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role.json
 }
 
@@ -284,6 +284,6 @@ resource "aws_iam_role_policy_attachment" "lambda_log_access" {
 
 # Create an IAM policy that will be attached to the role
 resource "aws_iam_policy" "lambda_log_access" {
-  name   = "cloudfront_auth_lambda_log_access"
+  name   = "cloudfront_auth_lambda_log_access_${var.bucket_name}"
   policy = data.aws_iam_policy_document.lambda_log_access.json
 }
