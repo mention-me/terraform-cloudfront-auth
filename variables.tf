@@ -94,7 +94,7 @@ variable "cloudfront_acm_certificate_arn" {
 }
 
 variable "runtime" {
-	type = "string"
-	description = "Which runtime would you like to use?"
-	default = "nodejs16.x"
+  type        = string
+  description = "Which runtime would you like to use?"
+  default     = "nodejs16.x"
 }
