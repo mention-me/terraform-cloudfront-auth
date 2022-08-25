@@ -92,3 +92,9 @@ variable "cloudfront_acm_certificate_arn" {
   description = "ACM Certificate ARN for Cloudfront"
   default     = null
 }
+
+variable "runtime" {
+	type = "string"
+	description = "Which runtime would you like to use?"
+	default = "nodejs16.x"
+}
